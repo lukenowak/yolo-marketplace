@@ -1,0 +1,7 @@
+{
+  "name": "repo-ops",
+  "description": "Git workflow automation and session-hygiene hooks, product-agnostic.",
+  "author": {
+    "name": "lukenowak"
+  }
+}

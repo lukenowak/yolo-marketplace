@@ -1,0 +1,17 @@
+{
+  "name": "yolo-marketplace",
+  "owner": {
+    "name": "lukenowak"
+  },
+  "metadata": {
+    "description": "Product-agnostic repo/session tooling for Claude Code: arena Git workflow rules and session-default hooks. Meant to be installed alongside a product marketplace.",
+    "version": "0.0.1"
+  },
+  "plugins": [
+    {
+      "name": "repo-ops",
+      "source": "./plugins/repo-ops",
+      "description": "Git workflow rules for a shared arena repo plus session-hygiene hooks (workdir/scratch isolation, session defaults, rules injected at session start)."
+    }
+  ]
+}
