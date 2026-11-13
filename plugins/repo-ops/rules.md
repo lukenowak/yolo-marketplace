@@ -17,6 +17,8 @@
 - Terse commit subjects stating the reason, not a diff summary; never `Co-Authored-By`/
   AI trailers, media, copyrighted content, or binaries.
 - Keep one functionality per commit unless coupled tests prove separation impossible.
+- Give every external reference its full URL at least once in the same message, so
+  it can be opened without searching.
 - Comment on why, not what. Minimal docstrings, minimal comments, no rhetoric,
   self-praise, or narration.
 - Commit messages and code comments must not name internal tooling or rule files --

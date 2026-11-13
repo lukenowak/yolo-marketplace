@@ -30,5 +30,9 @@ class RuleTextTest(unittest.TestCase):
                        "two fix attempts without measurable progress"):
             self.assertIn(phrase, text, phrase)
 
+    def test_external_references_carry_full_urls(self):
+        self.assertIn("Give every external reference its full URL at least once in the same "
+                      "message", rules())
+
 if __name__ == "__main__":
     unittest.main()
