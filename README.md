@@ -98,6 +98,10 @@ Prepare these, then hand them to Claude in a session -- it records them itself:
 For example: "Work on `<original repo URL>` in `<arena repo URL>`; tokens are in
 `<link>`."
 
+## Writing rules
+
+Rules in `rules.md` and skills follow `docs/rule-phrasing.md`.
+
 ## Validating
 
 ```bash
