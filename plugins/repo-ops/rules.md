@@ -2,7 +2,8 @@
 
 ## Conduct
 
-- Ask before installing a system package or expanding scope.
+- Ask before installing a system package or expanding scope. Fixing failures of your
+  own task branch, CI failures included, is within scope.
 - Share documents in the space named by `docs_space` in `~/.claude/repo.json`. If it
   is unset, ask the user to provide one (for example a SilverBullet space or a Google
   Docs folder) and the access it needs, then record it there, with its credentials in
