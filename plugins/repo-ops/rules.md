@@ -8,7 +8,8 @@
   Docs folder) and the access it needs, then record it there, with its credentials in
   `~/.claude/repo_tokens.json`; until then, report in the conversation.
 - Follow TDD: write a failing regression test first, then implement. Use synthetic test
-  data; mock external processes with `unittest.mock`, not hand-written fakes.
+  data; mock external processes with the language's standard mocking library rather
+  than hand-written fakes.
 
 ## Writing style
 
