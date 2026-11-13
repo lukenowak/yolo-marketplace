@@ -19,6 +19,8 @@
 - Keep one functionality per commit unless coupled tests prove separation impossible.
 - Give every external reference its full URL at least once in the same message, so
   it can be opened without searching.
+- Lead with the conclusion; leave out preamble, restating the request, and summaries
+  of what was just done.
 - Comment on why, not what. Minimal docstrings, minimal comments, no rhetoric,
   self-praise, or narration.
 - Commit messages and code comments must not name internal tooling or rule files --
