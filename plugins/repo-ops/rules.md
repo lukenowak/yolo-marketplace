@@ -44,6 +44,8 @@
 
 ## Session hygiene
 
+- Develop only in `clone_dir` from `repo.json` (default `<home>/tmp/{repo}`); other
+  trees on the host may be read-only references.
 - Scratch work goes under `<home>/tmp`, never a shared `/tmp`.
 - Keep the shell's working directory at `<home>`: reach other trees with absolute
   paths, `git -C <dir>`, or a `( cd <dir> && ... )` subshell. Deleting the working

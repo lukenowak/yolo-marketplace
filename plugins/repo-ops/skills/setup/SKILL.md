@@ -34,6 +34,9 @@ Write `~/.claude/repo.json` (outside the plugin, so plugin updates keep it), fol
   it holds no `/`, no `..` and no leading `-`. Leave out `token_key` for a public
   original. A single original may instead be recorded as `original_url`, shorthand for
   a one-entry `originals` keyed the same way.
+- `clone_dir`: where each repository's development clone lives, with `{repo}` standing
+  for the `<repo>` key; default `<home>/tmp/{repo}`. Set it when the host keeps a
+  long-lived clone elsewhere.
 - `docs_space` (`kind`, `url`, `token_key`): where you share documents, if provided.
 
 ## Arena
@@ -46,7 +49,8 @@ Write `~/.claude/repo.json` (outside the plugin, so plugin updates keep it), fol
 
 ## Git
 
-- Clone the arena under `<home>/tmp`; add each original as a remote named `<repo>`.
+- Clone the arena into `clone_dir` once per `<repo>`; add that original as a remote
+  named `<repo>`.
 - Keep tokens out of remote URLs: configure a credential helper that reads
   `~/.claude/repo_tokens.json` and picks the token by repository URL, so each original
   gets its own. URLs with tokens end up in configuration files.
