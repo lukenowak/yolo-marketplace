@@ -21,6 +21,8 @@
   it can be opened without searching.
 - Lead with the conclusion; leave out preamble, restating the request, and summaries
   of what was just done.
+- Report times in `timezone` from `repo.json` (the system zone if unset), converted
+  and unlabeled; label only a deliberately foreign zone.
 - Comment on why, not what. Minimal docstrings, minimal comments, no rhetoric,
   self-praise, or narration.
 - Commit messages and code comments must not name internal tooling or rule files --

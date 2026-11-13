@@ -37,5 +37,15 @@ class RuleTextTest(unittest.TestCase):
     def test_messages_lead_with_the_conclusion(self):
         self.assertIn("Lead with the conclusion", rules())
 
+    def test_times_are_reported_in_the_configured_zone(self):
+        self.assertIn("`timezone`", rules())
+        self.assertIn("label only a deliberately foreign zone", rules())
+
+    def test_setup_records_the_timezone(self):
+        skill = (RULES.parent / "skills" / "setup" / "SKILL.md").read_text(encoding="utf-8")
+        example = (RULES.parent / "repo.json.example").read_text(encoding="utf-8")
+        self.assertIn("`timezone`", skill)
+        self.assertIn('"timezone"', example)
+
 if __name__ == "__main__":
     unittest.main()

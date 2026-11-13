@@ -37,6 +37,8 @@ Write `~/.claude/repo.json` (outside the plugin, so plugin updates keep it), fol
 - `clone_dir`: where each repository's development clone lives, with `{repo}` standing
   for the `<repo>` key; default `<home>/tmp/{repo}`. Set it when the host keeps a
   long-lived clone elsewhere.
+- `timezone`: the IANA zone the user reads times in. Without it the system zone
+  applies; ask for it only when the system zone is UTC, which usually means a server.
 - `docs_space` (`kind`, `url`, `token_key`): where you share documents, if provided.
 
 ## Arena
