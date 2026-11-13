@@ -28,7 +28,8 @@
   to. Push task branches there, under a namespace prefix that keeps branches
   collision-free when arena is shared across several consumers.
 - Arena's default branch carries no content; never push work to it or delete it.
-- If `repo.json` names an `original_url`, cut task branches from its default branch.
+- If `repo.json` names `originals` (or the one-entry shorthand `original_url`), cut
+  task branches of `<repo>` from that original's default branch.
 
 ## Credentials
 
@@ -38,8 +39,8 @@
   anonymize usernames, paths, and hostnames in public text.
 - A missing token for a repo `repo.json` newly references is expected until handed
   over directly; ask for it in one line and continue once given.
-- Use a write-scoped token for arena. Reading an `original_url` only ever needs a
-  read-only token.
+- Use a write-scoped token for arena. Reading an original only ever needs a read-only
+  token.
 
 ## Session hygiene
 

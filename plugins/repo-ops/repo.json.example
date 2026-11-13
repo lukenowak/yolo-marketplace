@@ -1,7 +1,12 @@
 {
   "arena_url": "https://git.example.com/<org>/arena.git",
   "arena_token_key": "<token key in ~/.claude/repo_tokens.json>",
-  "original_url": "https://git.example.com/<org>/<original-repo>.git",
+  "originals": {
+    "<repo>": {
+      "url": "https://git.example.com/<org>/<repo>.git",
+      "token_key": "<token key in ~/.claude/repo_tokens.json>"
+    }
+  },
   "docs_space": {
     "kind": "<e.g. silverbullet, google-docs>",
     "url": "https://docs.example.com/<space>/",
