@@ -44,6 +44,8 @@
 
 ## Development loop
 
+- If the push starts no CI run, the local test run is the verdict; say so when
+  reporting.
 - After a push, arm a scheduled self-wakeup that checks CI until it reaches a verdict;
   re-arm it at session start while a verdict is still pending. The agent waits for CI
   itself, so never ask the user to check back later.

@@ -47,5 +47,9 @@ class RuleTextTest(unittest.TestCase):
         self.assertIn("`timezone`", skill)
         self.assertIn('"timezone"', example)
 
+    def test_development_loop_skips_arenas_without_ci(self):
+        self.assertIn("If the push starts no CI run, the local test run is the verdict",
+                      rules())
+
 if __name__ == "__main__":
     unittest.main()
