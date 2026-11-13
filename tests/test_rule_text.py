@@ -18,5 +18,9 @@ class RuleTextTest(unittest.TestCase):
         self.assertIn("the language's standard mocking library", rules())
 
 
+    def test_own_branch_failures_are_in_scope(self):
+        self.assertIn("Fixing failures of your own task branch, CI failures included, is "
+                      "within scope", rules())
+
 if __name__ == "__main__":
     unittest.main()
