@@ -10,6 +10,8 @@
   "timezone": "<IANA zone, e.g. Area/City>",
   "clone_dir": "<home>/tmp/{repo}",
   "disable_auto_compact": false,
+  "deny_extra": [],
+  "deny_remove": [],
   "docs_space": {
     "kind": "<e.g. silverbullet, google-docs>",
     "url": "https://docs.example.com/<space>/",

@@ -55,10 +55,15 @@ def apply_settings_defaults(settings, config=None):
         permissions["defaultMode"] = DEFAULT_MODE
         changes.append(f"permissions.defaultMode={DEFAULT_MODE}")
     deny = permissions.setdefault("deny", [])
-    for rule in DENY:
-        if rule not in deny:
+    removed = list(config.get("deny_remove") or [])
+    for rule in [*DENY, *(config.get("deny_extra") or [])]:
+        if rule not in removed and rule not in deny:
             deny.append(rule)
             changes.append(f"denied {rule}")
+    for rule in removed:
+        if rule in deny:
+            deny.remove(rule)
+            changes.append(f"allowed {rule}")
     env = settings.setdefault("env", {})
     for key, value in ENV.items():
         if env.get(key) != value:
