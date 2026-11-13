@@ -29,7 +29,6 @@ EXPECTED = {
     "env": {
         "CLAUDE_CODE_DISABLE_MOUSE": "1",
         "IS_SANDBOX": "1",
-        "DISABLE_AUTO_COMPACT": "1",
         "DISABLE_TELEMETRY": "1",
         "DO_NOT_TRACK": "1",
     },
@@ -66,6 +65,16 @@ class SettingsDefaultsTest(unittest.TestCase):
         self.assertEqual(settings["env"]["FOO"], "bar")
         self.assertTrue(settings["enabledPlugins"]["other@market"])
 
+    def test_lifts_the_auto_compact_switch_it_used_to_set(self):
+        settings = {"env": {"DISABLE_AUTO_COMPACT": "1"}}
+        self.module.apply_settings_defaults(settings)
+        self.assertNotIn("DISABLE_AUTO_COMPACT", settings["env"])
+
+    def test_keeps_auto_compact_off_when_opted_in(self):
+        settings = {}
+        self.module.apply_settings_defaults(settings, {"disable_auto_compact": True})
+        self.assertEqual(settings["env"]["DISABLE_AUTO_COMPACT"], "1")
+
     def test_reports_no_change_once_applied(self):
         settings = {}
         self.assertTrue(self.module.apply_settings_defaults(settings))
@@ -83,6 +92,7 @@ class MainTest(unittest.TestCase):
         for patcher in (
             mock.patch.object(self.module, "SETTINGS_PATH", self.settings),
             mock.patch.object(self.module, "CLAUDE_JSON_PATH", self.claude_json),
+            mock.patch.object(self.module, "REPO_JSON_PATH", self.home / ".claude" / "repo.json"),
             mock.patch.object(Path, "home", return_value=self.home),
             mock.patch("sys.stdout", io.StringIO()),
             mock.patch("sys.stderr", io.StringIO()),
@@ -109,6 +119,13 @@ class MainTest(unittest.TestCase):
         self.settings.write_text(text, encoding="utf-8")
         self.module.main()
         self.assertEqual(self.settings.read_text(encoding="utf-8"), text)
+
+    def test_reads_opt_ins_from_repo_json(self):
+        self.settings.parent.mkdir(parents=True)
+        (self.home / ".claude" / "repo.json").write_text(
+            json.dumps({"disable_auto_compact": True}), encoding="utf-8")
+        self.module.main()
+        self.assertEqual(self.read(self.settings)["env"]["DISABLE_AUTO_COMPACT"], "1")
 
     def test_marks_home_trusted(self):
         self.claude_json.write_text(json.dumps({"projects": {}}), encoding="utf-8")

@@ -39,6 +39,7 @@ Write `~/.claude/repo.json` (outside the plugin, so plugin updates keep it), fol
   long-lived clone elsewhere.
 - `timezone`: the IANA zone the user reads times in. Without it the system zone
   applies; ask for it only when the system zone is UTC, which usually means a server.
+- `disable_auto_compact`: `true` only if the user asks to keep context compaction off.
 - `docs_space` (`kind`, `url`, `token_key`): where you share documents, if provided.
 
 ## Arena

@@ -13,6 +13,7 @@ if sys.platform == "win32":
 
 SETTINGS_PATH = Path.home() / ".claude" / "settings.json"
 CLAUDE_JSON_PATH = Path.home() / ".claude.json"
+REPO_JSON_PATH = Path.home() / ".claude" / "repo.json"
 
 SETTINGS = {
     "skipDangerousModePermissionPrompt": True,
@@ -26,10 +27,12 @@ DEFAULT_MODE = "bypassPermissions"
 ENV = {
     "CLAUDE_CODE_DISABLE_MOUSE": "1",
     "IS_SANDBOX": "1",
-    "DISABLE_AUTO_COMPACT": "1",
     "DISABLE_TELEMETRY": "1",
     "DO_NOT_TRACK": "1",
 }
+# Long autonomous loops outlive the context window; compaction stays on unless
+# repo.json opts out. Earlier versions forced it off, so lift that value.
+AUTO_COMPACT_ENV = "DISABLE_AUTO_COMPACT"
 # Shared documents go to a space the user provides, not to hosted docs or pages.
 DENY = (
     "SendMessage", "ListAgents", "mcp__claude_ai_Claude_Docs",
@@ -40,7 +43,8 @@ DENY = (
 DISABLED_PLUGINS = ("cc-plugin-privacy@builtin",)
 
 
-def apply_settings_defaults(settings):
+def apply_settings_defaults(settings, config=None):
+    config = config or {}
     changes = []
     for key, value in SETTINGS.items():
         if settings.get(key) != value:
@@ -60,6 +64,13 @@ def apply_settings_defaults(settings):
         if env.get(key) != value:
             env[key] = value
             changes.append(f"env {key}={value}")
+    if config.get("disable_auto_compact") is True:
+        if env.get(AUTO_COMPACT_ENV) != "1":
+            env[AUTO_COMPACT_ENV] = "1"
+            changes.append(f"env {AUTO_COMPACT_ENV}=1")
+    elif env.get(AUTO_COMPACT_ENV) == "1":
+        del env[AUTO_COMPACT_ENV]
+        changes.append(f"removed env {AUTO_COMPACT_ENV}")
     plugins = settings.setdefault("enabledPlugins", {})
     for plugin in DISABLED_PLUGINS:
         if plugins.get(plugin) is not False:
@@ -74,6 +85,14 @@ def apply_home_trust(data):
         return []
     entry["hasTrustDialogAccepted"] = True
     return [f"marked {Path.home()} trusted"]
+
+
+def read_config():
+    try:
+        config = json.loads(REPO_JSON_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return config if isinstance(config, dict) else {}
 
 
 def update_json(path, apply, create):
@@ -96,7 +115,8 @@ def update_json(path, apply, create):
 
 
 def main():
-    update_json(SETTINGS_PATH, apply_settings_defaults, create=True)
+    config = read_config()
+    update_json(SETTINGS_PATH, lambda s: apply_settings_defaults(s, config), create=True)
     update_json(CLAUDE_JSON_PATH, apply_home_trust, create=False)
     return 0
 
