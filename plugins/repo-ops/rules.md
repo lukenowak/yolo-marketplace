@@ -33,6 +33,17 @@
 - If `repo.json` names `originals` (or the one-entry shorthand `original_url`), cut
   task branches of `<repo>` from that original's default branch.
 
+## Development loop
+
+- After a push, arm a scheduled self-wakeup that checks CI until it reaches a verdict;
+  re-arm it at session start while a verdict is still pending. The agent waits for CI
+  itself, so never ask the user to check back later.
+- A failure is fixed unless it is *pre-existing* (the same failure in a run without the
+  change; cite both run URLs) or *infrastructure* (the run broke and tested nothing).
+  "flake" is not a verdict.
+- Escalate to the user after two fix attempts without measurable progress, meaning
+  fewer failing tests or a later first failure.
+
 ## Credentials
 
 - Read tokens from `~/.claude/repo_tokens.json`; never reveal token values -- mask

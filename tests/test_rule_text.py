@@ -22,5 +22,13 @@ class RuleTextTest(unittest.TestCase):
         self.assertIn("Fixing failures of your own task branch, CI failures included, is "
                       "within scope", rules())
 
+    def test_development_loop_waits_for_ci_itself(self):
+        text = rules()
+        for phrase in ("## Development loop", "scheduled self-wakeup",
+                       "never ask the user to check back later", "*pre-existing*",
+                       "*infrastructure*", "\"flake\" is not a verdict",
+                       "two fix attempts without measurable progress"):
+            self.assertIn(phrase, text, phrase)
+
 if __name__ == "__main__":
     unittest.main()
