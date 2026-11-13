@@ -20,6 +20,7 @@ SETTINGS = {
     "feedbackSurveyRate": 0,
     "feedbackDrafts": "off",
     "crossSessionInbound": "refuse",
+    "spinnerTipsEnabled": False,
 }
 DEFAULT_MODE = "bypassPermissions"
 # settings.json env reaches Claude on every OS and shell, unlike shell rc files.
