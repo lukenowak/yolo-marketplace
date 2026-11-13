@@ -25,6 +25,7 @@ EXPECTED = {
     "feedbackSurveyRate": 0,
     "feedbackDrafts": "off",
     "crossSessionInbound": "refuse",
+    "spinnerTipsEnabled": False,
     "enabledPlugins": {"cc-plugin-privacy@builtin": False},
     "env": {
         "CLAUDE_CODE_DISABLE_MOUSE": "1",
