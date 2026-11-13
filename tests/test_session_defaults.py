@@ -75,6 +75,25 @@ class SettingsDefaultsTest(unittest.TestCase):
         self.module.apply_settings_defaults(settings, {"disable_auto_compact": True})
         self.assertEqual(settings["env"]["DISABLE_AUTO_COMPACT"], "1")
 
+    def test_denies_extra_rules_from_config(self):
+        settings = {}
+        self.module.apply_settings_defaults(settings, {"deny_extra": ["WebFetch"]})
+        self.assertIn("WebFetch", settings["permissions"]["deny"])
+
+    def test_removes_default_denials_named_in_config(self):
+        settings = {"permissions": {"deny": ["Artifact", "WebFetch"]}}
+        self.module.apply_settings_defaults(settings, {"deny_remove": ["Artifact"]})
+        deny = settings["permissions"]["deny"]
+        self.assertNotIn("Artifact", deny)
+        self.assertIn("WebFetch", deny)
+        self.assertIn("SendMessage", deny)
+
+    def test_config_overrides_settle_without_further_changes(self):
+        config = {"deny_extra": ["WebFetch"], "deny_remove": ["Artifact"]}
+        settings = {}
+        self.module.apply_settings_defaults(settings, config)
+        self.assertEqual(self.module.apply_settings_defaults(settings, config), [])
+
     def test_reports_no_change_once_applied(self):
         settings = {}
         self.assertTrue(self.module.apply_settings_defaults(settings))
