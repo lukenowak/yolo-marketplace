@@ -14,8 +14,10 @@
 
 ## Writing style
 
-- Terse commit subjects stating the reason, not a diff summary; never `Co-Authored-By`/
-  AI trailers, media, copyrighted content, or binaries.
+- Terse commit subjects stating the reason, not a diff summary.
+- Commits hold text you wrote: leave out `Co-Authored-By`/AI trailers, media,
+  copyrighted content and binaries, so authorship stays with the committer and every
+  change can be reviewed as a diff.
 - Keep one functionality per commit unless coupled tests prove separation impossible.
 - Give every external reference its full URL at least once in the same message, so
   it can be opened without searching.
@@ -23,8 +25,8 @@
   of what was just done.
 - Report times in `timezone` from `repo.json` (the system zone if unset), converted
   and unlabeled; label only a deliberately foreign zone.
-- Comment on why, not what. Minimal docstrings, minimal comments, no rhetoric,
-  self-praise, or narration.
+- Comment on why, not what. Keep docstrings and comments minimal and factual, without
+  rhetoric, self-praise or narration.
 - Commit messages and code comments must not name internal tooling or rule files --
   state only the durable technical reason.
 
@@ -35,7 +37,8 @@
 - Arena (`repo.json`'s `arena_url`) is the one repo an automated session pushes work
   to. Push task branches there, under a namespace prefix that keeps branches
   collision-free when arena is shared across several consumers.
-- Arena's default branch carries no content; never push work to it or delete it.
+- Arena's default branch carries no content; never push work to it or delete it --
+  push work to task branches instead.
 - If `repo.json` names `originals` (or the one-entry shorthand `original_url`), cut
   task branches of `<repo>` from that original's default branch.
 
@@ -46,7 +49,7 @@
   itself, so never ask the user to check back later.
 - A failure is fixed unless it is *pre-existing* (the same failure in a run without the
   change; cite both run URLs) or *infrastructure* (the run broke and tested nothing).
-  "flake" is not a verdict.
+  "flake" is not a verdict; name one of those two or fix it.
 - Escalate to the user after two fix attempts without measurable progress, meaning
   fewer failing tests or a later first failure.
 
