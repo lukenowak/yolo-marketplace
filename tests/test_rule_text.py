@@ -34,5 +34,8 @@ class RuleTextTest(unittest.TestCase):
         self.assertIn("Give every external reference its full URL at least once in the same "
                       "message", rules())
 
+    def test_messages_lead_with_the_conclusion(self):
+        self.assertIn("Lead with the conclusion", rules())
+
 if __name__ == "__main__":
     unittest.main()
