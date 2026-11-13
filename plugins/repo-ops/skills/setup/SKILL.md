@@ -19,7 +19,7 @@ configuration. Report what you set up, never token values.
 2. If a token arrives as a link (an encrypted paste, for example), fetch and decrypt it
    locally, show it only masked, and delete every temporary copy afterwards.
 3. Verify each token against its repository before relying on it. The arena token must
-   be able to push; the original repository needs read access only.
+   be able to push; originals need read access only.
 
 ## Configuration
 
@@ -28,7 +28,12 @@ Write `~/.claude/repo.json` (outside the plugin, so plugin updates keep it), fol
 
 - `arena_url`, `arena_token_key`: the repository you push task branches to, and the key
   of its write token.
-- `original_url`: the repository task branches are cut from, if the user named one.
+- `originals`: the repositories task branches are cut from, if the user named any, as
+  `{"<repo>": {"url": ..., "token_key": ...}}`. `<repo>` is the URL's last path
+  component without `.git`; it is the branch component that selects the original, so
+  it holds no `/`, no `..` and no leading `-`. Leave out `token_key` for a public
+  original. A single original may instead be recorded as `original_url`, shorthand for
+  a one-entry `originals` keyed the same way.
 - `docs_space` (`kind`, `url`, `token_key`): where you share documents, if provided.
 
 ## Arena
@@ -41,8 +46,9 @@ Write `~/.claude/repo.json` (outside the plugin, so plugin updates keep it), fol
 
 ## Git
 
-- Clone the arena under `<home>/tmp`; add the original repository as a second remote.
+- Clone the arena under `<home>/tmp`; add each original as a remote named `<repo>`.
 - Keep tokens out of remote URLs: configure a credential helper that reads
-  `~/.claude/repo_tokens.json`. URLs with tokens end up in configuration files.
+  `~/.claude/repo_tokens.json` and picks the token by repository URL, so each original
+  gets its own. URLs with tokens end up in configuration files.
 - If git has no global `user.name`/`user.email`, ask the user for the identity to
   commit with.

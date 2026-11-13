@@ -89,8 +89,8 @@ Prepare these, then hand them to Claude in a session -- it records them itself:
 - **Arena**: an empty repository the agent may write to and destroy, plus a write
   token scoped to just that repository. The agent keeps its default branch empty and
   pushes work to task branches.
-- **Original repository** (optional): the repository task branches are cut from, plus
-  a read-only token if it is private.
+- **Original repositories** (optional): one or more repositories task branches are cut
+  from, plus a read-only token for each private one.
 - **Document space** (optional): somewhere the agent can share documents, e.g. a
   SilverBullet space or a Google Docs folder, plus access to it. Without one, the agent
   asks when it first needs it.
