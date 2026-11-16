@@ -42,7 +42,10 @@ Write `~/.claude/repo.json` (outside the plugin, so plugin updates keep it), fol
 - `disable_auto_compact`: `true` only if the user asks to keep context compaction off.
 - `deny_extra`, `deny_remove`: permission rules to add to, or take out of, the deny
   list the plugin applies each session, if the user asks.
-- `docs_space` (`kind`, `url`, `token_key`): where you share documents, if provided.
+- `docs_space` (`kind`, `url`, `token_key`, `publish_command`): where you share documents, if provided.
+  `publish_command` comes from the layer that provides the space: a list of program
+  and arguments, with `{file}` and `{title}` replaced by the source file and the
+  document title. Record it only if that layer names one.
 
 ## Arena
 

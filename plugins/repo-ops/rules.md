@@ -8,6 +8,11 @@
   is unset, ask the user to provide one (for example a SilverBullet space or a Google
   Docs folder) and the access it needs, then record it there, with its credentials in
   `~/.claude/repo_tokens.json`; until then, report in the conversation.
+- When `docs_space` has a `publish_command`, publish through `docs_space.publish_command`:
+  run it with `{file}` and `{title}` replaced, and hand over the URL it prints. A
+  non-zero exit is a failed publish; report it rather than retrying another way, since
+  the command owns how documents reach the space. Without the command, publish to the
+  space by your own means.
 - Follow TDD: write a failing regression test first, then implement. Use synthetic test
   data; mock external processes with the language's standard mocking library rather
   than hand-written fakes.
