@@ -15,6 +15,7 @@
   "docs_space": {
     "kind": "<e.g. silverbullet, google-docs>",
     "url": "https://docs.example.com/<space>/",
-    "token_key": "<token key in ~/.claude/repo_tokens.json>"
+    "token_key": "<token key in ~/.claude/repo_tokens.json>",
+    "publish_command": ["<absolute path or PATH name>", "{file}", "{title}"]
   }
 }
