@@ -9,11 +9,11 @@
           },
           {
             "type": "command",
-            "command": "PY=$(command -v python3 || command -v python || command -v py); if [ -n \"$PY\" ]; then \"$PY\" \"${CLAUDE_PLUGIN_ROOT}\"/scripts/check-workdir.py; else echo \"[workdir check] WARNING: no python3/python/py interpreter found on PATH, skipping\" >&2; fi"
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}\"/scripts/run.sh check-workdir.py"
           },
           {
             "type": "command",
-            "command": "PY=$(command -v python3 || command -v python || command -v py); if [ -n \"$PY\" ]; then \"$PY\" \"${CLAUDE_PLUGIN_ROOT}\"/scripts/set-session-defaults.py; else echo \"[session defaults] WARNING: no python3/python/py interpreter found on PATH, skipping\" >&2; fi"
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}\"/scripts/run.sh set-session-defaults.py"
           }
         ]
       }
@@ -23,7 +23,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "PY=$(command -v python3 || command -v python || command -v py); if [ -n \"$PY\" ]; then \"$PY\" \"${CLAUDE_PLUGIN_ROOT}\"/scripts/check-workdir.py --block; else echo \"[workdir check] WARNING: no python3/python/py interpreter found on PATH, skipping\" >&2; fi"
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}\"/scripts/run.sh check-workdir.py --block"
           }
         ]
       }
