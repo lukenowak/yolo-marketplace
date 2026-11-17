@@ -60,6 +60,14 @@ class HookRequirementsTest(unittest.TestCase):
                 self.assertEqual(result.returncode, 2)
                 self.assertIn("python3", result.stderr)
 
+    def test_missing_curl_blocks_every_script_hook(self):
+        path = self.path_with("python3")
+        for event, command in script_hook_commands():
+            with self.subTest(event=event, command=command):
+                result = self.run_hook(command, path)
+                self.assertEqual(result.returncode, 2)
+                self.assertIn("curl", result.stderr)
+
     def test_hooks_run_when_requirements_are_present(self):
         path = self.path_with("python3", "curl")
         for event, command in script_hook_commands():
