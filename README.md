@@ -42,6 +42,15 @@ irm https://claude.ai/install.ps1 | iex
 
 Other methods are in the [Claude Code setup docs](https://code.claude.com/docs/en/setup).
 
+### Requirements
+
+Install these on the host before installing the plugin:
+
+- `python3` (on Windows, `python` or the `py` launcher also works)
+- `curl`
+
+If either is missing, the plugin's hooks stop the session with an error.
+
 ### Install the plugin
 
 > [!WARNING]

@@ -76,5 +76,13 @@ class HookRequirementsTest(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
 
 
+class ReadmeRequirementsTest(unittest.TestCase):
+    def test_readme_lists_the_tools_hooks_require(self):
+        readme = (PLUGIN.parents[1] / "README.md").read_text(encoding="utf-8")
+        section = readme.split("### Requirements", 1)[1].split("\n#", 1)[0]
+        for tool in ("python3", "curl"):
+            self.assertIn(f"`{tool}`", section)
+
+
 if __name__ == "__main__":
     unittest.main()
