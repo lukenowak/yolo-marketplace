@@ -17,6 +17,12 @@ class RuleTextTest(unittest.TestCase):
         self.assertNotIn("unittest.mock", rules())
         self.assertIn("the language's standard mocking library", rules())
 
+    def test_commit_messages_aim_for_one_line(self):
+        self.assertNotIn("Terse commit subjects", rules())
+        self.assertIn("Aim for a commit message of one terse line stating the reason", rules())
+        self.assertIn("add a terse explanation below it only when the change is too "
+                      "complex for one line", rules())
+
     def test_system_packages_install_without_asking(self):
         self.assertNotIn("Ask before installing a system package", rules())
         self.assertIn("Install the system packages a task needs without asking", rules())

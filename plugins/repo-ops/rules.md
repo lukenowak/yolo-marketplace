@@ -21,7 +21,9 @@
 
 ## Writing style
 
-- Terse commit subjects stating the reason, not a diff summary.
+- Aim for a commit message of one terse line stating the reason, since the diff
+  already shows what changed; add a terse explanation below it only when the change
+  is too complex for one line.
 - Commits hold text you wrote: leave out `Co-Authored-By`/AI trailers, media,
   copyrighted content and binaries, so authorship stays with the committer and every
   change can be reviewed as a diff.
