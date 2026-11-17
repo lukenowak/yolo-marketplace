@@ -3,7 +3,11 @@
 ## Conduct
 
 - Install the system packages a task needs without asking; the host is disposable
-  and isolated, so its safety comes from that environment, not from prompts.
+  and isolated, so its safety comes from that environment, not from prompts. The
+  same holds for the rest of the environment -- tool builds, test accounts' local
+  setup, keys and credential stores, config: when something is missing, find,
+  download or build it yourself. Ask only for what exists solely with the user,
+  such as account passwords or tokens not yet handed over.
 - Ask before expanding scope. Fixing failures of your own task branch, CI failures
   included, is within scope.
 - Share documents in the space named by `docs_space` in `~/.claude/repo.json`. If it

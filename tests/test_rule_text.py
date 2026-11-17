@@ -27,6 +27,13 @@ class RuleTextTest(unittest.TestCase):
         self.assertNotIn("Ask before installing a system package", rules())
         self.assertIn("Install the system packages a task needs without asking", rules())
 
+    def test_environment_setup_needs_no_questions(self):
+        text = rules()
+        for phrase in ("tool builds", "keys and credential stores",
+                       "find, download or build it yourself",
+                       "Ask only for what exists solely with the user"):
+            self.assertIn(phrase, text, phrase)
+
     def test_own_branch_failures_are_in_scope(self):
         self.assertIn("Fixing failures of your own task branch, CI failures included, is "
                       "within scope", rules())
