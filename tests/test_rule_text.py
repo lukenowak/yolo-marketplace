@@ -17,6 +17,9 @@ class RuleTextTest(unittest.TestCase):
         self.assertNotIn("unittest.mock", rules())
         self.assertIn("the language's standard mocking library", rules())
 
+    def test_system_packages_install_without_asking(self):
+        self.assertNotIn("Ask before installing a system package", rules())
+        self.assertIn("Install the system packages a task needs without asking", rules())
 
     def test_own_branch_failures_are_in_scope(self):
         self.assertIn("Fixing failures of your own task branch, CI failures included, is "
