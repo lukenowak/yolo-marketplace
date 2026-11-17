@@ -44,3 +44,6 @@
 ## Session hygiene
 
 - Scratch work goes under `<home>/tmp`, never a shared `/tmp`.
+- Keep the shell's working directory at `<home>`: reach other trees with absolute
+  paths, `git -C <dir>`, or a `( cd <dir> && ... )` subshell. Deleting the working
+  directory or its ancestor asks for confirmation even with permission prompts off.
